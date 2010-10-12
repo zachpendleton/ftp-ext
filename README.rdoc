@@ -1,6 +1,11 @@
 = ftp-ext
 
-Description goes here.
+A simple gem for pushing and syncing entire folders over FTP. Adds two new
+public methods to Net::FTP -- put_dir and sync_dir. Both take two arguments:
+the local folder to be pushed, and the remote folder to be synced to. 
+
+Right now it's missing any error checking, but is useful for basic operations
+in controlled environments.
 
 == Note on Patches/Pull Requests
  

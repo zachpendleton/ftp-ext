@@ -5,13 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "ftp-ext"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Folder copying methods for Net::FTP}
+    gem.description = %Q{ftp-ext adds two methods (sync_dir and put_dir) to Net::FTP to copy and sync whole folders over FTP.}
     gem.email = "zachpendleton@gmail.com"
     gem.homepage = "http://github.com/zpendleton/ftp-ext"
     gem.authors = ["Zach Pendleton"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency "shoulda", ">= 0"
+    gem.add_development_dependency "ptools", ">= 0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
