@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "ftp-ext.gemspec",
      "lib/ftp-ext.rb",
      "test/helper.rb",
      "test/test_ftp-ext.rb"
