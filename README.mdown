@@ -1,11 +1,23 @@
 FTPExt
 ======
-A simple gem for pushing/synching entire folders over FTP. Adds one new public
-method to Net::FTP &mdash; <code>put_dir</code>. It takes two arguments: the
-local folder to be pushed, and the remote folder it should be transferred to.
+A simple gem for copying, synching, and deleting entire folders over FTP. Adds
+two new public methods to Net::FTP &mdash; <code>put\_dir</code> and 
+<code>rmrf\_dir</code>. <code>put\_dir</code> takes a hash of arguments:
 
-Right now it's missing any error checking, but it's useful for basic 
-operations in controlled environments.
+*	local - (_string_) The relative or absolute path to the local directory to
+	be copied.
+*	remote - (_string_) The relative or absolute remote path that the local 
+	directory will be copied to.
+*	verbose - (_bool_: defaults to false) Will output progress if set to true.
+*	erase - (_bool_: defaults to false) If set to true, <code>put_dir</code>
+	will overwrite any existing directories (default behavior is to update
+	changed files only).
+*	exclude - (_array_) A list of any files in local directory to be excluded.
+	All file paths in <code>exclude</code> should be relative to <code>local
+	</code>
+
+<code>rmrf\_dir</code> takes two arguments: the path to the remote directory
+to be deleted, and a verbose boolean flag (defaulted to false).
 
 ## Usage
 To use FTPExt, require it and use Net::FTP as normal. Because FTPExt requires
@@ -17,18 +29,27 @@ Net::FTP for you, you don't need to include it separately.
 	ftp = Net::FTP.new('ftp/server/address')
 	ftp.login('username', 'password')
 	
-	ftp.put_dir('path/to/local', 'path/to/remote')
+	ftp.put_dir(:local => 'path/to/local', :remote => 'path/to/remote')
 
 For example, imagine I have a local directory, 
 <code>/Users/zpendleton/code</code>, that I want to upload on my server to the
 <code>/home/zpendleton</code> directory. I'd run the following command:
 
-	ftp.put_dir('/Users/zpendleton/code', '/home/zpendleton')
+	ftp.put_dir('/Users/zpendleton/code', '/home/zpendleton/code')
 
 If the <code>code</code> directory already exists in 
 <code>/home/zpendleton</code>, it will be updated (the script checks the 
 last modified timestamps of all files). If the <code>code</code> directory
-doesn't exist, it will be created. 
+doesn't exist, it will be created. To overwrite the <code>code</code> 
+directory on the server, set the <code>:erase</code> option in 
+<code>put\_dir</code> to <code>true</code>.
+
+To later delete the <code>/home/zpendleton/code</code> directory (in verbose 
+mode), you would use:
+
+	ftp.rmrf_dir('/home/zpendleton/code', true)
+
+To leave verbose mode turned off, you would just omit the second parameter.
 
 ## Contributing
 1.	Fork the project.

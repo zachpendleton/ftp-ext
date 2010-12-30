@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Zach Pendleton"]
   s.date = %q{2010-10-12}
-  s.description = %q{ftp-ext adds two methods (sync_dir and put_dir) to Net::FTP to copy and sync whole folders over FTP.}
+  s.description = %q{ftp-ext adds two methods (put_dir and rmrf_dir) to Net::FTP to copy, sync, and delete whole folders over FTP.}
   s.email = %q{zachpendleton@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE"
@@ -45,11 +45,11 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<shoulda>, [">= 2.11.3"])
       s.add_dependency(%q<ptools>, [">= 1.1.9"])
     else
-      s.add_dependency(%q<shoulda>, [">= 2.11.3"])
+      s.add_development_dependency(%q<shoulda>, [">= 2.11.3"])
       s.add_dependency(%q<ptools>, [">= 1.1.9"])
     end
   else
-    s.add_dependency(%q<shoulda>, [">= 2.11.3"])
+    s.add_development_dependency(%q<shoulda>, [">= 2.11.3"])
     s.add_dependency(%q<ptools>, [">= 1.1.9"])
   end
 end

@@ -10,9 +10,16 @@ module Net
         :local     => ".",
         :remote    => ".",
         :verbose   => false,
-        :erase     => false
+        :erase     => false,
+        :exclude   => []
       }.merge!(opts)
-            
+      
+      # Format options[:exclude]
+      unless options[:preformatted]
+        options[:exclude].map! { |f| File.join(options[:local], f) }
+        options[:preformatted] = true        
+      end
+      
       # Check for existence of directory on remote server
       # and create it if it isn't there. If it does exist,
       # call sync_dir instead.
@@ -37,7 +44,9 @@ module Net
       Dir.foreach(options[:local]) do |f|
         local  = File.join(options[:local], f)
         remote = File.join(options[:remote], f)
-
+        
+        (puts "excluding #{local}"; next) if options[:exclude].include?(local)
+        
         if File.file?(local)
           puts "cp #{remote}" if options[:verbose] == true
           File.binary?(local) ? putbinaryfile(local, remote) : puttextfile(local, remote)
@@ -81,11 +90,14 @@ module Net
     end
     
     protected
+    
     def sync_dir(options = {})
       # Loop through each directory and compare/update the files
       Dir.foreach(options[:local]) do |f|
         local  = File.join(options[:local], f)
         remote = File.join(options[:remote], f)
+        
+        (puts "excluding #{local}" if options[:verbose] == true; next) if options[:exclude].include?(local)
         
         if File.file?(local)
           if !remote_file_exists?(remote) || mtime(remote) < File.mtime(local)
