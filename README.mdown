@@ -1,0 +1,45 @@
+FTPExt
+======
+A simple gem for pushing/synching entire folders over FTP. Adds one new public
+method to Net::FTP &mdash; <code>put_dir</code>. It takes two arguments: the
+local folder to be pushed, and the remote folder it should be transferred to.
+
+Right now it's missing any error checking, but it's useful for basic 
+operations in controlled environments.
+
+## Usage
+To use FTPExt, require it and use Net::FTP as normal. Because FTPExt requires
+Net::FTP for you, you don't need to include it separately.
+
+	require 'rubygems'
+	require 'ftp-ext'
+	
+	ftp = Net::FTP.new('ftp/server/address')
+	ftp.login('username', 'password')
+	
+	ftp.put_dir('path/to/local', 'path/to/remote')
+
+For example, imagine I have a local directory, 
+<code>/Users/zpendleton/code</code>, that I want to upload on my server to the
+<code>/home/zpendleton</code> directory. I'd run the following command:
+
+	ftp.put_dir('/Users/zpendleton/code', '/home/zpendleton')
+
+If the <code>code</code> directory already exists in 
+<code>/home/zpendleton</code>, it will be updated (the script checks the 
+last modified timestamps of all files). If the <code>code</code> directory
+doesn't exist, it will be created. 
+
+## Contributing
+1.	Fork the project.
+2.	Create a branch (<code>git checkout -b my_edit</code>).
+3.	Commit your changes (<code>git commit -am "Added feature"</code>).
+4.	Push to the branch (<code>git push origin my_edit</code>).
+5.	Create an [issue](http://github.com/zpendleton/ftp-ext/issues) with a link 
+	to your branch.
+6.	Kick it old school to [this](http://www.youtube.com/watch?v=jEa1BYBgeQI)
+	while you wait. 
+
+## Copyright
+
+Copyright (c) 2010 Zach Pendleton. See LICENSE for details.
