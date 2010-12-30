@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ftp-ext}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Zach Pendleton"]
-  s.date = %q{2010-10-12}
-  s.description = %q{ftp-ext adds two methods (put_dir and rmrf_dir) to Net::FTP to copy, sync, and delete whole folders over FTP.}
+  s.date = %q{2010-12-30}
+  s.description = %q{FTPExt adds two methods (put_dir and rmrf_dir) to Net::FTP to copy, sync, and delete whole folders over FTP.}
   s.email = %q{zachpendleton@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE"
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Folder copying methods for Net::FTP}
+  s.summary = %q{Folder copying and deletion methods for Net::FTP}
   s.test_files = [
     "test/helper.rb",
      "test/test_ftp-ext.rb"
