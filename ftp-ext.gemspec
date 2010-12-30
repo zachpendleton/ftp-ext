@@ -13,8 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{ftp-ext adds two methods (sync_dir and put_dir) to Net::FTP to copy and sync whole folders over FTP.}
   s.email = %q{zachpendleton@gmail.com}
   s.extra_rdoc_files = [
-    "LICENSE",
-     "README.rdoc"
+    "LICENSE"
   ]
   s.files = [
     ".document",
