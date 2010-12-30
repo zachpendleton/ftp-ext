@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
     ".document",
      ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.mdown",
      "Rakefile",
      "VERSION",
      "ftp-ext.gemspec",
