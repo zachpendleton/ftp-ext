@@ -31,8 +31,8 @@ module Net
           fpath = File.join(file_segments[0..n])
           
           unless remote_file_exists?(fpath) || fpath == ""
-            puts "mkdir #{fpath}" if options[:verbose] == true
             mkdir(fpath)
+            puts "mkdir #{fpath}" if options[:verbose] == true
           end
         end
       else
@@ -131,11 +131,13 @@ module Net
       else
         fname = fpath.pop
         fpath.map! { |v| v == "" ? File::SEPARATOR : v }
-        fpath = fpath.join(File::SEPARATOR)
+        fpath = File.join(fpath)
 
         # Wrap return in begin..rescue because nlst errors on empty directory
         begin
-          return nlst(fpath).include?(File.join(fpath, fname))
+          # Standardize output across Windows, Linux, OS X
+          dirlist = nlst(fpath).map { |f| f.match(/[^\/\\]+$/)[0] }
+          return dirlist.include?(fname)
         rescue Exception => e
           return false if e.message.match("450")
         end
